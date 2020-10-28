@@ -255,4 +255,33 @@ def my_function(x: int) -> int:
 print('(enclose2 o my_function)(4) = {:d}'.format(my_function(4)))
 
 
+# --------------------------------------------------------------
+# yeld
+# --------------------------------------------------------------
+
+
+def gen() -> typing.Generator[int, None, None]:
+    i: int
+    for i in range(0, 10):
+        yield i
+
+
+for i in gen():
+    print(f'i = {i:d}')
+
+
+def ywords(in_path: str) -> typing.Generator[str, None, None]:
+    with open(in_path, "r") as fd:
+        for line in fd:
+            words: typing.List[str] = line.split()
+            word: str
+            for word in words:
+                yield word
+
+
+for word in ywords("data.txt"):
+    print(f"w: {word:s}")
+
+words_unique: typing.Set[str] = set(ywords("data.txt"))
+print(words_unique)
 
