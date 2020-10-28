@@ -144,6 +144,7 @@ def rot13(in_string: str):
 
 print(rot13("NZ nz"))
 
+# Generate a "table for the rotation"
 table1 = [c for c in range(0, ord('A'))]
 table2 = [chr((c-ord('A')-13) % 26 + ord('A')) for c in range(ord('A'), ord('Z')+1)]
 table3 = [c for c in range(ord('Z')+1, ord('a'))]
@@ -161,8 +162,8 @@ print(table)
 
 
 def uwords(in_path: str) -> typing.List[str]:
-    fd: typing.TextIO = open(in_path, "r")
     words: typing.Set[str] = set([])
+    fd: typing.TextIO = open(in_path, "r")
     for line in fd:
         words.update(line.split())
     fd.close()
