@@ -123,6 +123,12 @@ my_generator = (v for v in my_list)
 print("my_generator is a generator? {:s}".format("yes" if isinstance(my_generator, typing.Generator) else "no"))
 print("my_generator is a list? {:s}".format("yes" if isinstance(my_generator, typing.List) else "no"))
 
+# List => set
+my_set1: typing.Set[int] = set(range(0, 10))
+print(my_set1)
+my_set2: typing.Set[str] = set([chr(c) for c in range(ord('a'), ord('z')+1)])
+print(my_set2)
+
 
 # --------------------------------------------------------------
 # Rot 13
@@ -171,6 +177,82 @@ def uwords(in_path: str) -> typing.Set[str]:
 
 
 print(uwords("data.txt"))
+
+
+def cwords(in_path: str) -> typing.Mapping[str, int]:
+    word_count: typing.Mapping[str, int] = {}
+    fd: typing.TextIO = open(in_path, "r")
+    for line in fd:
+        words: typing.List[str] = line.split()
+        word: str
+        for word in words:
+            word_count[word] = word_count.get(word, 0) + 1
+    fd.close()
+    return word_count
+
+
+counts = cwords("data.txt")
+for k in counts.keys():
+    print('{:s}: {:d}'.format(k, counts[k]))
+
+
+# --------------------------------------------------------------
+# Closures
+# --------------------------------------------------------------
+
+# This function returns a closure.
+# The value of "x" is "enclosed".
+
+def enclose1(x: int) -> typing.Callable[[], int]:
+
+    def func() -> int:
+        return 2 * x
+
+    return func
+
+
+c1: typing.Callable[[int], int] = enclose1(2)
+print(f'exec c1 -> {c1():d}')
+
+
+# --------------------------------------------------------------
+# Decorators
+# --------------------------------------------------------------
+
+
+# Using a lambda.
+def f(function: typing.Callable[[int], int]) -> typing.Callable[[int], int]:
+    return lambda x: 2*function(x)
+
+
+@f
+def g(x: int) -> int:
+    return x+3
+
+
+print(f'fog(3) = {g(3)}')  # should print "fog(3) = 12"
+
+
+# Using a defined (multiline) function
+def enclose2(f: typing.Callable[[int], int]) -> typing.Callable[[int], int]:
+
+    def func(value: int) -> int:
+        return 2 * f(value)
+
+    return func
+
+
+c2: typing.Callable[[int], int] = enclose2(lambda x: 3*x)
+print('c2(4) = {:d}'.format(c2(4)))  # Should return 3*4*2
+
+
+@enclose2
+def my_function(x: int) -> int:
+    return 10 * x
+
+
+# We should get: 10 * 4 * 2 = 80
+print('(enclose2 o my_function)(4) = {:d}'.format(my_function(4)))
 
 
 
