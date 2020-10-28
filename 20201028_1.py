@@ -161,13 +161,13 @@ print("count: {:d}".format(table.__len__()))
 print(table)
 
 
-def uwords(in_path: str) -> typing.List[str]:
+def uwords(in_path: str) -> typing.Set[str]:
     words: typing.Set[str] = set([])
     fd: typing.TextIO = open(in_path, "r")
     for line in fd:
         words.update(line.split())
     fd.close()
-    return list(words)
+    return words
 
 
 print(uwords("data.txt"))
