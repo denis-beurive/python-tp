@@ -1,4 +1,5 @@
 import typing
+import sys
 
 # --------------------------------------------------------------
 # Exercise 1
@@ -284,4 +285,7 @@ for word in ywords("data.txt"):
 
 words_unique: typing.Set[str] = set(ywords("data.txt"))
 print(words_unique)
+
+
+
 
