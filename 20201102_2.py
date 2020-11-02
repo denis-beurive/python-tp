@@ -116,8 +116,8 @@ print(create_dict(["a", "b"], [10, 20]))
 
 class V:
 
-    def __init__(self, *args: int):
-        self.vector = list(args)
+    def __init__(self, *coordinates: int):
+        self.vector = list(coordinates)
 
     def __repr__(self) -> str:
         return f'V({", ".join([f"{x:d}" for x in self.vector]):s})'
