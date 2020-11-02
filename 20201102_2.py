@@ -1,5 +1,6 @@
 import typing
 import collections
+import math
 
 
 # This solution does not use a comprehension
@@ -87,6 +88,33 @@ def count_words3(in_path: str) -> typing.Counter[str]:
 
 print(count_words3("data.txt"))
 
+# Create a dict for 2 lists. A list of keys and a list of values.
+def create_dict(keys: list, values: list) -> dict:
+    return dict(zip(keys, values))
+
+
+print(create_dict(["a", "b"], [10, 20]))
+
+
+class V:
+
+    def __init__(self, *args):
+        self.v = list(args)
+
+    def __repr__(self):
+        return f'V({", ".join([f"{x:d}" for x in self.v]):s})'
+
+    def __abs__(self):
+        return math.sqrt(sum([x**2 for x in self.v]))
+
+    def __len__(self):
+        return len(self.v)
+
+
+v = V(10, 20, 30)
+print(len(v))
+print(v)
+print(abs(v))
 
 
 
