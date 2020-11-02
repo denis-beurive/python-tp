@@ -1,6 +1,7 @@
 import typing
 
 
+# This solution does not use a comprehension
 def ywords1(in_path: str) -> typing.Set[str]:
     uniq_words: typing.Set[str] = set()
     with open(in_path, "r") as fd:
@@ -10,7 +11,8 @@ def ywords1(in_path: str) -> typing.Set[str]:
     return uniq_words
 
 
-def ywords2(in_path: str):
+# This is just fot test.
+def words_yield(in_path: str):
     with open(in_path, "r") as fd:
         line: str
         for line in fd:
@@ -19,14 +21,12 @@ def ywords2(in_path: str):
 
 
 # This is the good solution
-def ywords3(in_path: str):
-    result = set()
+def ywords4(in_path: str):
     with open(in_path, "r") as fd:
-        result.update(set(word for line in fd for word in line.split()))
-    return result
+        return set(word for line in fd for word in line.split())
 
 
-for counter, value in enumerate(ywords3("data.txt")):
+for counter, value in enumerate(ywords4("data.txt")):
     print(f"{counter:d}: {value:s}")
 
 
