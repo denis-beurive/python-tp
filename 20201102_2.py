@@ -14,7 +14,7 @@ def ywords1(in_path: str) -> typing.Set[str]:
     return uniq_words
 
 
-# This is just fot test.
+# This is just for test.
 def words_yield(in_path: str) -> typing.Generator[str, None, None]:
     fd: typing.TextIO
     with open(in_path, "r") as fd:
@@ -101,7 +101,7 @@ print(count_words3("data.txt"))
 # ZIP ans dictionary.
 # -----------------------------------------------
 
-# Create a dict for 2 lists. A list of keys and a list of values.
+# Create a dict from 2 lists: a list of keys and a list of values.
 def create_dict(keys: list, values: list) -> dict:
     return dict(zip(keys, values))
 
