@@ -50,6 +50,10 @@ def ywords4(in_path: str) -> typing.Set[str]:
 for counter, value in enumerate(ywords4("data.txt")):
     print(f"{counter:d}: {value:s}")
 
+# -----------------------------------------------
+# Using defaultdict.
+# -----------------------------------------------
+
 
 def count_words1(in_path: str):
     result = collections.defaultdict(int)
@@ -66,7 +70,11 @@ for counter, value in enumerate(count_words1("data.txt")):
     print(f"{counter:d}: {value:s}")
 
 
-# This solution uses a Counter object.
+# -----------------------------------------------
+# Using counters.
+# -----------------------------------------------
+
+# This solution uses a Counter object. But it could be better.
 def count_words2(in_path: str) -> typing.Counter[str]:
     result = collections.Counter()
     fd: typing.TextIO
@@ -88,6 +96,11 @@ def count_words3(in_path: str) -> typing.Counter[str]:
 
 print(count_words3("data.txt"))
 
+
+# -----------------------------------------------
+# ZIP ans dictionary.
+# -----------------------------------------------
+
 # Create a dict for 2 lists. A list of keys and a list of values.
 def create_dict(keys: list, values: list) -> dict:
     return dict(zip(keys, values))
@@ -96,19 +109,24 @@ def create_dict(keys: list, values: list) -> dict:
 print(create_dict(["a", "b"], [10, 20]))
 
 
+# -----------------------------------------------
+# Class.
+# -----------------------------------------------
+
+
 class V:
 
-    def __init__(self, *args):
-        self.v = list(args)
+    def __init__(self, *args: int):
+        self.vector = list(args)
 
-    def __repr__(self):
-        return f'V({", ".join([f"{x:d}" for x in self.v]):s})'
+    def __repr__(self) -> str:
+        return f'V({", ".join([f"{x:d}" for x in self.vector]):s})'
 
-    def __abs__(self):
-        return math.sqrt(sum([x**2 for x in self.v]))
+    def __abs__(self) -> float:
+        return math.sqrt(sum([x ** 2 for x in self.vector]))
 
-    def __len__(self):
-        return len(self.v)
+    def __len__(self) -> int:
+        return len(self.vector)
 
 
 v = V(10, 20, 30)
