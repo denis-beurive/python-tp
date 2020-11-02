@@ -69,7 +69,5 @@ def fgen6(f: typing.Callable[[typing.Any], typing.Any], x: typing.Any) \
 
 
 # Expected: 3, 2*3, 2*2*3, 2*2*2*3
-v: int
-for v in fgen6(lambda x: 2*x, 3):
-    print(f"{v:d}")
-    sys.stdout.flush()
+for counter, value in enumerate(fgen6(lambda x: 2*x, 3)):
+    print(f"{counter:d}: {value:d}")
