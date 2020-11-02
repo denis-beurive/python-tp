@@ -3,7 +3,6 @@ import sys
 
 
 # x, f(x), f(f(x)), f(f(f(x)))...
-
 def fgen(f: typing.Callable[[int], int], x: int) -> typing.Generator[int, None, None]:
     first: bool = True
     last_value: int = x
@@ -32,6 +31,7 @@ def fgen2(f: typing.Callable[[int], int], x: int) -> typing.Generator[int, None,
         x = v
 
 
+# x, f(x), f(f(x)), f(f(f(x)))...
 def fgen3(f: typing.Callable[[typing.Any], typing.Any], x: typing.Any) \
         -> typing.Generator[typing.Any, None, None]:
     yield x
@@ -41,6 +41,7 @@ def fgen3(f: typing.Callable[[typing.Any], typing.Any], x: typing.Any) \
         x = v
 
 
+# x, f(x), f(f(x)), f(f(f(x)))...
 def fgen4(f: typing.Callable[[typing.Any], typing.Any], x: typing.Any) \
         -> typing.Generator[typing.Any, None, None]:
     ff = lambda x: x
@@ -51,6 +52,7 @@ def fgen4(f: typing.Callable[[typing.Any], typing.Any], x: typing.Any) \
         ff = f
 
 
+# x, f(x), f(f(x)), f(f(f(x)))...
 def fgen5(f: typing.Callable[[typing.Any], typing.Any], x: typing.Any) \
         -> typing.Generator[typing.Any, None, None]:
     for i in range(0, 100):
@@ -58,6 +60,7 @@ def fgen5(f: typing.Callable[[typing.Any], typing.Any], x: typing.Any) \
         yield x
 
 
+# x, f(x), f(f(x)), f(f(f(x)))...
 def fgen6(f: typing.Callable[[typing.Any], typing.Any], x: typing.Any) \
         -> typing.Generator[typing.Any, None, None]:
     while True:
