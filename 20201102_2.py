@@ -5,6 +5,7 @@ import collections
 # This solution does not use a comprehension
 def ywords1(in_path: str) -> typing.Set[str]:
     uniq_words: typing.Set[str] = set()
+    fd: typing.TextIO
     with open(in_path, "r") as fd:
         line: str
         for line in fd:
@@ -13,7 +14,8 @@ def ywords1(in_path: str) -> typing.Set[str]:
 
 
 # This is just fot test.
-def words_yield(in_path: str):
+def words_yield(in_path: str) -> typing.Generator[str, None, None]:
+    fd: typing.TextIO
     with open(in_path, "r") as fd:
         line: str
         for line in fd:
@@ -38,7 +40,8 @@ def words_yield(in_path: str):
 #
 # => set(C for A in B for C in D)
 
-def ywords4(in_path: str):
+def ywords4(in_path: str) -> typing.Set[str]:
+    fd: typing.TextIO
     with open(in_path, "r") as fd:
         return set(word for line in fd for word in line.split())
 
@@ -49,7 +52,9 @@ for counter, value in enumerate(ywords4("data.txt")):
 
 def count_words1(in_path: str):
     result = collections.defaultdict(int)
+    fd: typing.TextIO
     with open(in_path, "r") as fd:
+        line: str
         for line in fd:
             for word in line.split():
                 result[word] += 1
@@ -61,17 +66,22 @@ for counter, value in enumerate(count_words1("data.txt")):
 
 
 # This solution uses a Counter object.
-def count_words2(in_path: str):
+def count_words2(in_path: str) -> typing.Counter[str]:
     result = collections.Counter()
+    fd: typing.TextIO
     with open(in_path, "r") as fd:
+        line: str
         for line in fd:
             result.update(line.split())
     return result
 
 
 # This solution is the best one.
-def count_words3(in_path: str):
+def count_words3(in_path: str) -> typing.Counter[str]:
+    fd: typing.TextIO
     with open(in_path, "r") as fd:
+        word: str
+        line: str
         return collections.Counter(word for line in fd for word in line.split())
 
 
