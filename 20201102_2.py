@@ -21,6 +21,22 @@ def words_yield(in_path: str):
 
 
 # This is the good solution
+# Note:
+#
+#       for line in fd:
+#           for word in line.split():
+#               ...
+#
+# => set(word for line in fd for word in line.split())
+#
+# Generalisation:
+#
+#       for A in B:
+#           for C in D:
+#               ...
+#
+# => set(C for A in B for C in D)
+
 def ywords4(in_path: str):
     with open(in_path, "r") as fd:
         return set(word for line in fd for word in line.split())
